@@ -4,7 +4,7 @@ ALPHA Camp | 學期 3 | Simple Twitter | 自動化測試檔 (全端開發組)
 
 ### Live Demo
 
-[Heroku Link](https://cryptic-earth-77265.herokuapp.com/users/64/likes)
+[Heroku Link](https://cryptic-earth-77265.herokuapp.com/)
 
 ![首頁畫面](https://github.com/weitungstyle/twitter-fullstack-2020/blob/master/public/%E9%A6%96%E9%A0%81%E6%88%AA%E5%9C%96.jpg)
 
@@ -59,13 +59,13 @@ create database ac_twitter_workspace;
 3. Open terminal enter following order to copy the repository to local
 
 ```
-git clone https://github.com/weitungstyle/twitter-fullstack-2020.git
+git clone https://github.com/weitungstyle/twitter-fullstack-2023.git
 ```
 
 4. Enter target folder
 
 ```
-cd twitter-fullstack-2020
+cd twitter-fullstack-2023
 ```
 
 5. Create a ".env" file to use whole function, using your imgur client ID replace "SKIP". (We place a .env.example file for your reference.)

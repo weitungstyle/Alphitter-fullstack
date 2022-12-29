@@ -1,13 +1,12 @@
 {
   "name": "y",
   "version": "1.0.0",
-  "description": "ALPHA Camp | 學期 3 | Simple Twitter | 自動化測試檔 (全端開發組)",
+  "description": "ALPHA Camp | 學期 3 | Simple Twitter | Individual Improvement version",
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=development node app.js",
     "dev": "NODE_ENV=development nodemon app.js",
-    "test": "mocha test --exit --recursive --timeout 5000",
-    "lint": "eslint \"**/*.js\" --fix"
+    "test": "mocha test --exit --recursive --timeout 5000"
   },
   "author": "",
   "license": "ISC",
@@ -43,12 +42,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/weitungstyle/twitter-fullstack-2020.git"
+    "url": "git+https://github.com/weitungstyle/twitter-fullstack-2023.git"
   },
   "bugs": {
-    "url": "https://github.com/weitungstyle/twitter-fullstack-2020/issues"
+    "url": "https://github.com/weitungstyle/twitter-fullstack-2023/issues"
   },
-  "homepage": "https://github.com/weitungstyle/twitter-fullstack-2020#readme",
+  "homepage": "https://github.com/weitungstyle/twitter-fullstack-2023#readme",
   "optionalDependencies": {
     "win-node-env": "^0.6.1"
   },
