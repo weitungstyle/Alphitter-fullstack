@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 const path = require('path')
 const express = require('express')
 const helpers = require('./_helpers')
-const handlebars = require('express-handlebars')
+const exphbs = require('express-handlebars')
 const flash = require('connect-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
@@ -13,18 +13,17 @@ const passport = require('./config/passport')
 const routes = require('./routes')
 const app = express()
 const port = process.env.PORT || 3000
-const SESSION_SECRET = 'Alphitter'
 
 // use helpers.getUser(req) to replace req.user
 // use helpers.ensureAuthenticated(req) to replace req.isAuthenticated()
-app.engine('hbs', handlebars({ defaultLayout: 'main', extname: 'hbs', helpers: handlebarsHelpers }))
+app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: 'hbs', helpers: handlebarsHelpers }))
 app.set('view engine', 'hbs')
 app.use(express.urlencoded({ extended: true }))
 app.use('/upload', express.static(path.join(__dirname, 'upload')))
 app.use(express.static('public'))
 
 app.use(session({
-  secret: SESSION_SECRET,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false
 }))
