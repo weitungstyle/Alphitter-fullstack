@@ -1,5 +1,5 @@
 {
-  "name": "y",
+  "name": "alphitter",
   "version": "1.0.0",
   "description": "ALPHA Camp | 學期 3 | Simple Twitter | Individual Improvement Version",
   "main": "index.js",
@@ -26,7 +26,8 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "sequelize": "^6.28.0",
-    "sequelize-cli": "^6.5.2"
+    "sequelize-cli": "^6.5.2",
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "proxyquire": "^2.1.3",

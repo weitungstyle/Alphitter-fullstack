@@ -9,6 +9,7 @@ const flash = require('connect-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
 const handlebarsHelpers = require('./helpers/handlebars-helpers')
+const { clearTemp } = require('./helpers/file-helpers')
 const passport = require('./config/passport')
 const routes = require('./routes')
 const app = express()
@@ -45,5 +46,5 @@ app.use((req, res, next) => {
 app.use(routes)
 
 app.listen(port, () => { console.log(`Example app listening on port ${port}!`) })
-
+setInterval(clearTemp, 43200000)
 module.exports = app
