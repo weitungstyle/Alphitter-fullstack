@@ -12,7 +12,9 @@ const adminController = {
   },
   logout: (req, res, next) => {
     req.flash('success_messages', '登出成功！')
-    req.logout()
+    req.logout((err)=>{
+      if (err) {return next(err)}
+    })
     res.redirect('/admin/signin')
   },
   getTweets: (req, res, next) => {

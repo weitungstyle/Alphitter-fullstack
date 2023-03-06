@@ -15,7 +15,7 @@
   {{#ifCond route "tweets"}}
   {{#each tweets}}
   <div class="tab-tweets">
-    <div class="card-body tweets-box">
+    <div class="card-body tweets-box" style="width: 500px">
       <img src="{{#if ../user.avatar}} {{../user.avatar}} {{else}}/images/icon/User Photo.png{{/if}}" alt=""
         class="user-avatar">
       <div class="tweets-box-main">
@@ -24,7 +24,8 @@
           <span class="tweets-account"> @{{../user.account}} ．{{relativeTimeFromNow this.createdAt}}</span>
         </div>
         <div class="tweets-content">
-          {{this.description}}
+          <span
+            style="white-space: pre-line;overflow:hidden;word-break:break-word;margin-right:10px;">{{this.description}}</span>
         </div>
         <div class="tweets-icons">
           <a><img src="/images/basic/white/reply.svg">{{this.repliesCount}}</a>

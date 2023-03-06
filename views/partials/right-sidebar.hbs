@@ -18,7 +18,9 @@
           <small class="small-account single-line-ellipsis">@{{this.account}}</small>
         </div>
         <div>
-          {{#if this.isFollowed}}
+          {{#if isCurrentUser }}
+          <div></div>
+          {{else if this.isFollowed}}
           <form action="/followships/{{this.id}}?_method=DELETE" method="POST">
             <button type="submit" name="id" value="{{this.id}}" class="following-btn">正在跟隨</button>
             {{!-- <span class="followCount" style="">人數:{{this.followCount}}</span> --}}

@@ -89,13 +89,13 @@ border-bottom: 1px solid red;
 }
 .invalid-feedback{
 display: none;
-} 
+}
 .invalid-feedback {
 color: red
 }
 form.was-validated .form-control:invalid ~ .invalid-feedback {
 display: initial;
-} 
+}
 /* form.was-validated .input:invalid {
 border-bottom: 1px solid #FC5A5A;
 border-radius: 0px 0px 4px 4px;
@@ -244,13 +244,26 @@ border-right:1px solid #E6ECF0;
 }
 
 /* 主頁下方貼文 */
+
+#tweet-icon {
+  margin-left: 23.13px;
+  /* margin-bottom: 52px; */
+  width: 50px;
+  height: 50px;
+}
+
+#tweet-right {
+  margin-left: 8px;
+  padding: 0;
+}
+
 .tweets-box {
 display: flex;
 position: relative;
 padding:0;
 border-bottom: 1px solid #E6ECF0;
 /* word-wrap:break-word; */
-} 
+}
 
 #toReply {
 color: inherit;
@@ -266,6 +279,7 @@ padding: 0;
 .tweets-header {
 font-style: normal;
 font-weight: 700;
+max-width: 860px;
 margin-bottom: 8px;
 }
 .tweets-header span{
@@ -798,8 +812,8 @@ display: flex;
 justify-content: center;
 }
 .admin-main{
-height: calc(100vh - 76px); 
-max-height: calc(100vh - 76px); 
+height: calc(100vh - 76px);
+max-height: calc(100vh - 76px);
 }
 .admin-tweets,.admin-users {
 overflow-y: auto;
@@ -1183,7 +1197,7 @@ color:#C4C4C4;
 
 .post-main-top {
 padding: 16px 26px;
-display: flex;  
+display: flex;
 position: relative;
 height: 234px;
 width: 100%;

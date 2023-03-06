@@ -1,0 +1,77 @@
+<div class="card-home">
+  <div class=" home-header">
+    首頁
+  </div>
+  <div class="main-top">
+    <img src="{{#if user.avatar}} {{user.avatar}} {{else}}/images/icon/User Photo.png{{/if}}"
+      class="user-avatar">
+    <div class="">
+      <form action="/tweets" method="POST" class="form">
+        <textarea style="resize:none;width:400px;" type="text" name="description" id="description"
+          placeholder="有什麼新鮮事？" oninput="checkLength(this)" required></textarea>
+        <div class="text-end">
+          <span id="limit-count" style="color:#C4C4C4;">
+            0/140
+          </span>
+          <button type="submit" class="btn-sml">推文</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="home" style="height: calc(100vh - 235px); max-height: calc(100vh - 235px); overflow-y: auto">
+  {{#each Tweets}}
+  {{>reply-modal user=this.User tweet=this User=../currentUser}}
+  <div class="main-bottom d-flex border-bottom" style="padding: 16px 0">
+    <div id="tweet-icon">
+      <a href="/users/{{this.User.id}}/tweets">
+        {{#if this.User.avatar}}
+        <img src="{{this.User.avatar}}" alt="avatar" class="user-avatar">
+        {{else}}
+        <img src="/images/icon/User Photo.png" alt="avatar" class="user-avatar">
+        {{/if}}</a>
+    </div>
+    <div id="tweet-right" style="width: 500px">
+      <div class="tweets-header" onclick="window.open('/tweets/{{this.id}}/replies','_self');" style="cursor: pointer;">
+        {{this.User.name}}
+        <span class="tweets-account"> @{{this.User.account}} ．{{relativeTimeFromNow this.createdAt}}</span>
+      </div>
+
+
+      <div class="tweets-content" onclick="window.open('/tweets/{{this.id}}/replies','_self');" style="cursor: pointer;">
+        <a href="/tweets/{{this.id}}/replies" id="toReply" class="card-text">
+          <span
+            style="white-space: pre-line;overflow:hidden;word-break:break-word;margin-right:10px;">{{this.description}}</span>
+        </a>
+      </div>
+
+
+      <div class="tweets-icons">
+        <div class="d-flex reply">
+          <div data-bs-toggle="modal" data-bs-target="#reply-modal-{{this.id}}" class="d-flex align-items-center" style="cursor: pointer;">
+            <img src="/images/basic/white/reply.svg">
+          </div>
+        </div>
+        {{this.repliesCount}}
+
+
+        {{#ifCond this.isLiked false}}
+        <form action="/tweets/{{this.id}}/like" method="POST">
+          <label for="" style="display:inline-flex;">
+            <input type="image" style="width:14px" src="/images/basic/white/like.svg">
+          </label>
+        </form>
+        {{else}}
+        <form action="/tweets/{{this.id}}/unlike" method="POST">
+          <label for="" style="display:inline-flex;">
+            <input type="image" style="width:13.4px;text-align=center;" src="/images/basic/isliked.svg">
+          </label>
+        </form>
+        {{/ifCond}}
+        {{this.likesCount}}
+      </div>
+    </div>
+
+  </div>
+  {{/each}}
+</div>
