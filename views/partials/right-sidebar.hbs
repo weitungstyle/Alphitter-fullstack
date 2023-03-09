@@ -3,9 +3,9 @@
     <div class="popular-title">
       <h4>推薦跟隨</h4>
     </div>
-    <ul class="popular-list-group p-3">
+    <ul class="popular-list-group p-3" style="display:inline">
       {{#each result}}
-      <li class="list-group-item d-flex justify-content-between m-0 mb-4">
+      <li class="list-group-item d-flex align-items-start justify-content-between">
         <div class="user-icon">
           <a class="tweets-name" href="/users/{{this.id}}/tweets"> {{#if this.avatar}}
             <img src="{{this.avatar}}" alt="avatar" class="user-avatar">
@@ -13,9 +13,9 @@
             <img src="/images/icon/User Photo.png" alt="avatar" class="user-avatar">
             {{/if}}</a>
         </div>
-        <div class="ms-2" style="max-width: 100%; margin-right: 8px">
-          <div class="popular-name">{{this.name}}</div>
-          <small class="small-account single-line-ellipsis">@{{this.account}}</small>
+        <div class="ms-2 me-auto">
+          <div class="popular-name" style="text-overflow:ellipsis; overflow:hidden; width:4.5rem">{{this.name}}</div>
+          <small class="small-account" style="text-overflow:ellipsis; overflow:hidden; width:4.5rem">@{{this.account}}</small>
         </div>
         <div>
           {{#if isCurrentUser }}

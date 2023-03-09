@@ -10,7 +10,7 @@
   </li>
 </ul>
 
-<div class="d-flex flex-column tabs-content">
+<div class="d-flex flex-column tabs-content home" style="height: calc(100vh - 568px); max-height: calc(100vh - 568px); overflow-y: auto">
   <!-- if = 推文 -->
   {{#ifCond route "tweets"}}
   {{#each tweets}}
@@ -61,7 +61,7 @@
   {{#each replies}}
   <div class="tab-tweets">
     <div id="tweet-icon">
-      <a href="/users/{{this.UserId}}/tweets"></a>
+      <a href="/users/{{this.UserId}}/tweets">
         <img src="{{#if ../user.avatar}} {{../user.avatar}} {{else}}/images/icon/User Photo.png{{/if}}" alt="" class="user-avatar">
       </a>
     </div>
@@ -126,6 +126,7 @@
         {{/ifCond}}
         {{this.Tweet.likesCount}}
       </div>
+
     </div>
   </div>
   {{/each}}

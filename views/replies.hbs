@@ -1,13 +1,12 @@
-<div class="container">
-  <div class="row">
+<div class="d-flex" style="height: 1200x;width:1250px;margin: 0 auto;">
     {{>left-sidebar}}
     <div class="col-6 top">
       <div class="card-home">
-        <div class=" home-header" style="border-right:1px solid #E6ECF0;">
+        <div class="home-header">
           <a href="javascript:history.back()"><img src="/images/basic/back.svg" alt="" class="back-icon"></a>
           推文
         </div>
-        <div class="tweetAndReply" style="border-right:1px solid #E6ECF0;">
+        <div class="tweetAndReply">
           <div class="tweets-box-sec">
             <img src="{{#if tweet.User.avatar}} {{tweet.User.avatar}} {{else}}/images/icon/User Photo.png{{/if}}"
               class="user-avatar">
@@ -20,7 +19,7 @@
           </div>
           <div class="tweets-content-sec">
             {{tweet.description}}
-            <p class="tweets-account">
+            <p class="tweets-account text-end" style="padding-right:30px">
               {{relativeTimeOtherType tweet.createdAt}}
             </p>
           </div>
@@ -48,7 +47,7 @@
             {{this.likesCount}}
           </div>
         </div>
-        <div class="reply-box" style="border-right:1px solid #E6ECF0;">
+        <div class="reply-box">
           {{!-- reply card --}}
           {{#each replies}}
           <div class="reply-card">
@@ -82,7 +81,6 @@
       </div>
     </div>
     {{> right-sidebar}}
-  </div>
 </div>
 
 <div class="modal fade" id="reply-Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -130,7 +128,7 @@
             </div>
             <form action="/tweets/{{tweet.id}}/replies" method="POST">
               <label for="description" class="form-label"></label>
-              <textarea cols="65" class="post-tweet-content" type="text" style="height:180px;" name="description"
+              <textarea cols="65" class="post-tweet-content" type="text" style="height:250px;" name="description"
                 id="replyDescription" placeholder="推你的回覆..." oninput="replyCounts()" onclick="replyCheck()"
                 required></textarea>
               <div style="position:relative;">
@@ -149,6 +147,7 @@
     </div>
   </div>
 </div>
+{{>post-modal}}
 
 {{!-- tweet Modal function --}}
 <script>
