@@ -244,7 +244,6 @@ border-right:1px solid #E6ECF0;
 }
 
 /* 主頁下方貼文 */
-
 #tweet-icon {
   margin-left: 23.13px;
   /* margin-bottom: 52px; */
@@ -678,17 +677,18 @@ padding-bottom: 11px;
 
 /* 個人主頁tab內容 */
 .tabs-content{
-display: flex;
-flex-direction:column;
-height: calc(100vh - 522px);
-max-height: calc(100vh - 522px);
+  position: relative;
+  left: 1px;
+  padding: 0px;
+  width: 639px;
+  border: 1px;
+  border-color: transparent #e6ecf0 #e6ecf0;
 }
 
 .tab-tweets {
-display: flex;
-padding: 16px 0;
-border-left:1px solid #E6ECF0;
-border-right:1px solid #E6ECF0;
+  display:flex;
+  border-bottom: 1px solid #e6ecf0;
+  padding: 16px 0;
 }
 
 /* 帳戶設定 */
