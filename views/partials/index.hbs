@@ -36,8 +36,6 @@
         {{this.User.name}}
         <span class="tweets-account"> @{{this.User.account}} ．{{relativeTimeFromNow this.createdAt}}</span>
       </div>
-
-
       <div class="tweets-content" onclick="window.open('/tweets/{{this.id}}/replies','_self');" style="cursor: pointer;">
         <a href="/tweets/{{this.id}}/replies" id="toReply" class="card-text">
           <span
@@ -45,33 +43,31 @@
         </a>
       </div>
 
-
-      <div class="tweets-icons">
+      <div class="actions d-flex justify-content-between">
         <div class="d-flex reply">
-          <div data-bs-toggle="modal" data-bs-target="#reply-modal-{{this.id}}" class="d-flex align-items-center" style="cursor: pointer;">
-            <img src="/images/basic/white/reply.svg">
-          </div>
+          <button data-bs-toggle="modal" data-bs-target="#reply-modal-{{this.id}}">
+            <img src="/images/basic/white/reply.svg" alt="replies" style="width:16px; height: 16px">
+          </button>
+          <span style="line-height: 14px; font-size:14px; font-weight:600; color: #6C757D;">{{this.repliesCount}}</span>
         </div>
-        {{this.repliesCount}}
-
-
-        {{#ifCond this.isLiked false}}
-        <form action="/tweets/{{this.id}}/like" method="POST">
-          <label for="" style="display:inline-flex;">
-            <input type="image" style="width:14px" src="/images/basic/white/like.svg">
-          </label>
-        </form>
-        {{else}}
-        <form action="/tweets/{{this.id}}/unlike" method="POST">
-          <label for="" style="display:inline-flex;">
-            <input type="image" style="width:13.4px;text-align=center;" src="/images/basic/isliked.svg">
-          </label>
-        </form>
-        {{/ifCond}}
-        {{this.likesCount}}
+        <div class="d-flex like">
+          {{#if this.isLiked}}
+          <form action="/tweets/{{this.id}}/unlike" method="post">
+            <button type="submit">
+              <img src="/images/basic/isliked.svg" alt="like" style="width:16px; height: 16px">
+            </button>
+          </form>
+          {{else}}
+          <form action="/tweets/{{this.id}}/like" method="post">
+            <button type="submit">
+              <img src="/images/basic/white/like.svg" alt="like" style="width:16px; height: 16px">
+            </button>
+          </form>
+          {{/if}}
+          <span style="line-height: 14px; font-size:14px; font-weight:600; color: #6C757D;">{{this.likesCount}}</span>
+        </div>
       </div>
     </div>
-
   </div>
   {{/each}}
 </div>

@@ -258,6 +258,28 @@ border-right:1px solid #E6ECF0;
   padding: 0;
 }
 
+#tweet-right .actions {
+  width: 120px;
+  height: 16px;
+  margin-bottom: 8px;
+}
+
+#tweet-right .actions button {
+  padding: 0;
+  border: 0;
+  background-color: #fff;
+}
+
+#tweet-right .actions .reply {
+  gap:8px;
+  align-items: center;
+}
+
+#tweet-right .actions .like {
+  gap:8px;
+  align-items: center;
+}
+
 .each-tweet {
   border: 1px solid #e6ecf0;
 }
@@ -789,7 +811,7 @@ font-size: 20px;
 }
 
 .logout {
-margin-top: calc(100vh - 400px);
+margin-top: calc(100vh - 380px);
 }
 
 .logout span,
@@ -811,6 +833,7 @@ height: calc(100vh - 76px);
 max-height: calc(100vh - 76px);
 }
 .admin-tweets,.admin-users {
+border: 1px solid #E6ECF0;
 overflow-y: auto;
 }
 .admin-users::-webkit-scrollbar,
