@@ -495,7 +495,7 @@ border-bottom: 1px solid #E6ECF0;
 /* followings*/
 /* header */
 .home-header-sec {
-border: 1px solid #E6ECF0;
+border-bottom: 1px solid #E6ECF0;
 display: flex;
 align-items: center;
 padding-left: 28px;
@@ -547,11 +547,12 @@ margin:16px 30px;
 /* 個人和其他使用者profile */
 .profile-cover {
 height: 200px;
+border-bottom:1px solid #E6ECF0;
 }
 .profile-cover img{
 height:100%;
 width:100%;
-object-fit:cover"
+object-fit:cover;
 }
 .profile-avatar {
 margin-top:-80px;
@@ -559,8 +560,8 @@ z-index:100;
 position:relative;
 display: flex;
 justify-content:space-between;
-border-left:1px solid #E6ECF0;
-border-right:1px solid #E6ECF0;
+/* border-left:1px solid #E6ECF0;
+border-right:1px solid #E6ECF0; */
 }
 .profileImg {
 width: 140px;
@@ -610,7 +611,7 @@ color: #FFFFFF;
 .profile-context {
 display: flex;
 flex-direction: column;
-border-right: 1px solid #E6ECF0;
+/* border-right: 1px solid #E6ECF0; */
 margin-left: 10px;
 }
 

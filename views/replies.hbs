@@ -18,8 +18,9 @@
             </div>
           </div>
           <div class="tweets-content-sec">
-            {{tweet.description}}
-            <p class="tweets-account text-end" style="padding-right:30px">
+            <span
+            style="white-space: pre-line;overflow:hidden;word-break:break-word;margin-right:10px;padding-right:36px">{{tweet.description}}</span>
+            <p class="tweets-account text-end" style="padding-right:16px">
               {{relativeTimeOtherType tweet.createdAt}}
             </p>
           </div>
