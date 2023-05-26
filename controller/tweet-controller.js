@@ -6,7 +6,6 @@ const helper = require('../_helpers')
 
 const tweetController = {
   postTweet: (req, res) => {
-
     // const UserId = helper.getUser(req).id
     const description = String(req.body.description)
 
@@ -33,10 +32,10 @@ const tweetController = {
       [Tweet.findAll({
         attributes: {
           include: [
-            [sequelize.literal(`(SELECT COUNT(*) FROM Replies WHERE tweet_id = Tweet.id)`), 'repliesCount'],
-            [sequelize.literal(`(SELECT COUNT(*) FROM Likes WHERE tweet_id = Tweet.id)`), 'likesCount'],
+            [sequelize.literal('(SELECT COUNT(*) FROM Replies WHERE tweet_id = Tweet.id)'), 'repliesCount'],
+            [sequelize.literal('(SELECT COUNT(*) FROM Likes WHERE tweet_id = Tweet.id)'), 'likesCount'],
             [sequelize.literal(`(SELECT (COUNT(*)>0) FROM Likes WHERE user_id = ${helper.getUser(req).id} AND tweet_id = Tweet.id)`), 'isLiked']
-          ],
+          ]
         },
         // where: { UserId: { [Op.or]: [followedUser.following_id] } },
         include: { model: User, attributes: ['id', 'name', 'account', 'avatar'] },
@@ -51,7 +50,7 @@ const tweetController = {
         const currentUser = helper.getUser(req)
         const data = await tweets.map(tweet => ({
           ...tweet,
-          isLiked: Boolean(tweet.isLiked),
+          isLiked: Boolean(tweet.isLiked)
         }))
         const result = await users
           .map(user => ({
@@ -83,13 +82,12 @@ const tweetController = {
     const id = req.params.id
     return Like.findOne({ where: { UserId: helper.getUser(req).id, TweetId: id } })
       .then(like => {
-        if (!like) throw new Error(`You haven't like this tweet!`)
+        if (!like) throw new Error('You haven\'t like this tweet!')
         return like.destroy()
       })
       .then(() => res.redirect('back'))
       .catch(err => next(err))
   }
 }
-
 
 module.exports = tweetController

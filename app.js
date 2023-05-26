@@ -17,24 +17,31 @@ const port = process.env.PORT || 3000
 
 // use helpers.getUser(req) to replace req.user
 // use helpers.ensureAuthenticated(req) to replace req.isAuthenticated()
-app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: 'hbs', helpers: handlebarsHelpers }))
+app.engine(
+  'hbs',
+  exphbs.engine({
+    defaultLayout: 'main',
+    extname: 'hbs',
+    helpers: handlebarsHelpers
+  })
+)
 app.set('view engine', 'hbs')
 app.use(express.urlencoded({ extended: true }))
 app.use('/upload', express.static(path.join(__dirname, 'upload')))
 app.use(express.static('public'))
 
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false
-}))
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+  })
+)
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 app.use(methodOverride('_method'))
 
-app.use(flash())
-app.use(methodOverride('_method'))
 app.use((req, res, next) => {
   res.locals.success_messages = req.flash('success_messages')
   res.locals.error_messages = req.flash('error_messages')
@@ -42,9 +49,10 @@ app.use((req, res, next) => {
   next()
 })
 
-
 app.use(routes)
 
-app.listen(port, () => { console.log(`Example app listening on port ${port}!`) })
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}!`)
+})
 setInterval(clearTemp, 43200000)
 module.exports = app

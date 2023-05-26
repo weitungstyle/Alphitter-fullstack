@@ -7,7 +7,7 @@ const userController = {
   signInPage: (req, res) => {
     res.render('signin')
   },
-  //帳號密碼核對會在passport
+  // 帳號密碼核對會在passport
   signIn: (req, res) => {
     req.flash('success_messages', '成功登入！')
     res.redirect('/tweets')
@@ -20,8 +20,8 @@ const userController = {
     if (!account.trim() || !name.trim() || !email.trim() || !password.trim() || !checkPassword.trim()) throw new Error('輸入項目不完整!')
     if (password !== checkPassword) throw new Error('密碼不相符!ヽ(#`Д´)ﾉ')
     if (name.length > 50) throw new Error('字數超出上限ヽ(#`Д´)ﾉ')
-    //const { Op } = require('sequelize')
-    //使用sequelize operator or，來選擇搜尋兩樣東西。
+    // const { Op } = require('sequelize')
+    // 使用sequelize operator or，來選擇搜尋兩樣東西。
     return Promise.all([User.findOne({ where: { email } }), User.findOne({ where: { account } })])
       .then(([email, account]) => {
         if (email) throw new Error('Email already exists!')
@@ -41,13 +41,13 @@ const userController = {
   },
   logout: (req, res) => {
     req.flash('success_messages', '登出成功！')
-    req.logout((err)=>{
-      if (err) {return next(err)}
+    req.logout((err) => {
+      if (err) { return next(err) }
     })
     res.redirect('/signin')
   },
 
-  //註冊修改頁面
+  // 註冊修改頁面
   getSetting: (req, res, next) => {
     return User.findByPk(helpers.getUser(req).id, { raw: true })
       .then(user => {
@@ -57,7 +57,7 @@ const userController = {
       })
       .catch(err => next(err))
   },
-  //註冊修改頁面驗證
+  // 註冊修改頁面驗證
   putSetting: (req, res, next) => {
     const loginUser = helpers.getUser(req)
     const editUserId = req.params.id
@@ -94,8 +94,8 @@ const userController = {
       User.findByPk(editUserId)
     ])
       .then(([checkAccount, checkEmail, user]) => {
-        if (checkAccount) throw new Error("account 已重複註冊！")
-        if (checkEmail) throw new Error("email 已重複註冊！")
+        if (checkAccount) throw new Error('account 已重複註冊！')
+        if (checkEmail) throw new Error('email 已重複註冊！')
         const hash = bcrypt.hashSync(editPassword, 10)
         user.update({
           account: editAccount,
@@ -116,7 +116,7 @@ const userController = {
       User.findByPk(queryUserId, {
         attributes: {
           include: [
-            [sequelize.literal(`(SELECT COUNT(*) FROM Followships WHERE following_id = User.id)`), 'followerCount'],
+            [sequelize.literal('(SELECT COUNT(*) FROM Followships WHERE following_id = User.id)'), 'followerCount'],
             [sequelize.literal('(SELECT COUNT(*) FROM Followships WHERE follower_id = User.id)'), 'followingCount'],
             [sequelize.literal('(SELECT COUNT(*) FROM Tweets WHERE user_id = User.id)'), 'tweetsCount'],
             [sequelize.literal(`(SELECT (COUNT(*) > 0) FROM Followships WHERE following_id = ${queryUserId} AND follower_id=${loginUserId})`), 'isFollowed']
@@ -128,8 +128,8 @@ const userController = {
       Tweet.findAll({
         attributes: {
           include: [
-            [sequelize.literal(`(SELECT COUNT(*) FROM Replies WHERE tweet_id = Tweet.id)`), 'repliesCount'],
-            [sequelize.literal(`(SELECT COUNT(*) FROM Likes WHERE tweet_id = Tweet.id)`), 'likesCount'],
+            [sequelize.literal('(SELECT COUNT(*) FROM Replies WHERE tweet_id = Tweet.id)'), 'repliesCount'],
+            [sequelize.literal('(SELECT COUNT(*) FROM Likes WHERE tweet_id = Tweet.id)'), 'likesCount'],
             [sequelize.literal(`(SELECT (COUNT(*)>0) FROM Likes WHERE user_id = ${loginUserId} AND tweet_id = Tweet.id)`), 'isLiked']
           ]
         },
@@ -141,7 +141,7 @@ const userController = {
       User.findAll({
         where: { role: 'user' },
         include: [{ model: User, as: 'Followers' }]
-      }),
+      })
     ])
       .then(([user, tweets, users]) => {
         const currentUser = helpers.getUser(req)
@@ -168,7 +168,7 @@ const userController = {
       Followship.findOne({
         where: {
           followerId: loginUserId,
-          followingId: followingId
+          followingId
         }
       })
     ])
@@ -177,7 +177,7 @@ const userController = {
         if (followship) throw new Error('You have already followed this user!')
         return Followship.create({
           followerId: loginUserId,
-          followingId: followingId
+          followingId
         })
       })
       .then(() => res.redirect('back'))
@@ -189,7 +189,7 @@ const userController = {
     Followship.findOne({
       where: {
         followerId: loginUserId,
-        followingId: followingId
+        followingId
       }
     })
       .then(followship => {
@@ -206,7 +206,7 @@ const userController = {
       User.findByPk(queryUserId, {
         attributes: {
           include: [
-            [sequelize.literal(`(SELECT COUNT(*) FROM Followships WHERE following_id = User.id)`), 'followerCount'],
+            [sequelize.literal('(SELECT COUNT(*) FROM Followships WHERE following_id = User.id)'), 'followerCount'],
             [sequelize.literal('(SELECT COUNT(*) FROM Followships WHERE follower_id = User.id)'), 'followingCount'],
             [sequelize.literal('(SELECT COUNT(*) FROM Tweets WHERE user_id = User.id)'), 'tweetsCount'],
             [sequelize.literal(`(SELECT (COUNT(*) > 0) FROM Followships WHERE following_id = ${queryUserId} AND follower_id=${loginUserId})`), 'isFollowed']
@@ -247,7 +247,7 @@ const userController = {
       User.findByPk(queryUserId, {
         attributes: {
           include: [
-            [sequelize.literal(`(SELECT COUNT(*) FROM Followships WHERE following_id = User.id)`), 'followerCount'],
+            [sequelize.literal('(SELECT COUNT(*) FROM Followships WHERE following_id = User.id)'), 'followerCount'],
             [sequelize.literal('(SELECT COUNT(*) FROM Followships WHERE follower_id = User.id)'), 'followingCount'],
             [sequelize.literal('(SELECT COUNT(*) FROM Tweets WHERE user_id = User.id)'), 'tweetsCount'],
             [sequelize.literal(`(SELECT (COUNT(*) > 0) FROM Followships WHERE following_id = ${queryUserId} AND follower_id=${loginUserId})`), 'isFollowed']
@@ -263,12 +263,13 @@ const userController = {
           include: [User],
           attributes: {
             include: [
-              [sequelize.literal(`(SELECT COUNT(*) FROM Replies WHERE tweet_id = Tweet.id)`), 'repliesCount'],
-              [sequelize.literal(`(SELECT COUNT(*) FROM Likes WHERE tweet_id = Tweet.id)`), 'likesCount'],
+              [sequelize.literal('(SELECT COUNT(*) FROM Replies WHERE tweet_id = Tweet.id)'), 'repliesCount'],
+              [sequelize.literal('(SELECT COUNT(*) FROM Likes WHERE tweet_id = Tweet.id)'), 'likesCount'],
               [sequelize.literal(`(SELECT (COUNT(*)>0) FROM Likes WHERE user_id = ${loginUserId} AND tweet_id = Tweet.id)`), 'isLiked']
             ]
           }
-        }], order: [['createdAt', 'DESC']],
+        }],
+        order: [['createdAt', 'DESC']],
         nest: true,
         raw: true
       }),
@@ -374,6 +375,5 @@ const userController = {
       .catch(err => next(err))
   }
 }
-
 
 module.exports = userController

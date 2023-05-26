@@ -2,9 +2,9 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const bcrypt = require('bcryptjs')
 
-const { User, Restaurant } = require('../models')
+const { User } = require('../models')
 
-// // set up Passport strategy
+// set up Passport strategy
 passport.use(new LocalStrategy(
   // customize user field
   {

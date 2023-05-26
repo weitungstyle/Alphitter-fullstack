@@ -7,6 +7,6 @@ const upload = multer({
     const err = new Error('Only support .png/.jpg/.jpeg')
     return cb(err, false)
   }
- })
+})
 
 module.exports = upload

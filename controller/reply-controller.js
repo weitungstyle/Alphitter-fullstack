@@ -10,8 +10,8 @@ const replyController = {
     return Promise.all([Tweet.findByPk(tweetId, {
       attributes: {
         include: [
-          [sequelize.literal(`(SELECT COUNT(*) FROM Replies WHERE tweet_id = Tweet.id)`), 'repliesCount'],
-          [sequelize.literal(`(SELECT COUNT(*) FROM Likes WHERE tweet_id = Tweet.id)`), 'likesCount'],
+          [sequelize.literal('(SELECT COUNT(*) FROM Replies WHERE tweet_id = Tweet.id)'), 'repliesCount'],
+          [sequelize.literal('(SELECT COUNT(*) FROM Likes WHERE tweet_id = Tweet.id)'), 'likesCount'],
           [sequelize.literal(`(SELECT (COUNT(*)>0) FROM Likes WHERE user_id = ${loginUser} AND tweet_id = Tweet.id)`), 'isLiked']
         ]
       },
@@ -66,7 +66,6 @@ const replyController = {
         })
         .catch(err => next(err))
     }
-
   }
 }
 

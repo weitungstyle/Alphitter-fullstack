@@ -4,7 +4,6 @@ const passport = require('../../config/passport')
 const adminController = require('../../controller/admin-controller')
 const { authenticatedAdmin } = require('../../middleware/auth')
 
-
 router.get('/signin', adminController.signInPage)
 router.post('/signin', passport.authenticate('local', { failureRedirect: '/admin/signin', failureFlash: true }), adminController.signIn)
 router.get('/logout', adminController.logout)

@@ -1,6 +1,5 @@
-const { User, Tweet, Followship } = require('../models')
+const { User, Tweet } = require('../models')
 const sequelize = require('sequelize')
-const { getUser } = require('../_helpers')
 
 const adminController = {
   signInPage: (req, res) => {
@@ -12,8 +11,8 @@ const adminController = {
   },
   logout: (req, res, next) => {
     req.flash('success_messages', '登出成功！')
-    req.logout((err)=>{
-      if (err) {return next(err)}
+    req.logout((err) => {
+      if (err) { return next(err) }
     })
     res.redirect('/admin/signin')
   },
@@ -37,7 +36,7 @@ const adminController = {
     return User.findAll({
       attributes: {
         include: [
-          [sequelize.literal(`(SELECT COUNT(*) FROM Followships WHERE following_id = User.id)`), 'followerCount'],
+          [sequelize.literal('(SELECT COUNT(*) FROM Followships WHERE following_id = User.id)'), 'followerCount'],
           [sequelize.literal('(SELECT COUNT(*) FROM Followships WHERE follower_id = User.id)'), 'followingCount'],
           [sequelize.literal('(SELECT COUNT(*) FROM Tweets WHERE user_id = User.id)'), 'tweetsCount'],
           [sequelize.literal('(SELECT COUNT(*) FROM Likes WHERE user_id = User.id)'), 'likesCount']
@@ -57,7 +56,7 @@ const adminController = {
     const tweetId = req.params.id
     return Tweet.findByPk(tweetId)
       .then(tweet => {
-        if (!tweet) throw new Error("The tweet does not exist!")
+        if (!tweet) throw new Error('The tweet does not exist!')
         return tweet.destroy()
       })
       .then(() => res.redirect('/admin/tweets'))

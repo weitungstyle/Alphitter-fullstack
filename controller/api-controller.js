@@ -35,7 +35,7 @@ const apiController = {
           name,
           introduction,
           avatar: avatar || user.avatar,
-          cover: coverImage || user.cover,
+          cover: coverImage || user.cover
         })
           .then(() => {
             req.flash('success_messages', '資料修改成功!')
