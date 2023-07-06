@@ -39,7 +39,7 @@ const apiController = {
         })
           .then(() => {
             req.flash('success_messages', '資料修改成功!')
-            res.redirect(200, 'back')
+            res.redirect('back')
           })
           .catch(err => next(err))
       })

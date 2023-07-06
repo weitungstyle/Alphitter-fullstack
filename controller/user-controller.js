@@ -41,9 +41,7 @@ const userController = {
   },
   logout: (req, res) => {
     req.flash('success_messages', '登出成功！')
-    req.logout((err) => {
-      next(err)
-    })
+    req.logout((err) => { next(err) })
     res.redirect('/signin')
   },
 
@@ -149,7 +147,8 @@ const userController = {
           .map(user => ({
             ...user.toJSON(),
             followCount: user.Followers.length,
-            isFollowed: helpers.getUser(req).Followings.some(f => f.id === user.id)
+            isFollowed: helpers.getUser(req).Followings.some(f => f.id === user.id),
+            isCurrentUser: user.id === currentUser.id
           }))
           .sort((a, b) => b.followCount - a.followCount)
         res.render('user-tweets', { user, tweets, result: result.slice(0, 10), currentUser })
@@ -161,7 +160,7 @@ const userController = {
     const followingId = Number(req.body.id)
     if (loginUserId === followingId) {
       req.flash('error_messages', "You can't follow yourself!")
-      return res.redirect(200, 'back')
+      return res.redirect('back')
     }
     Promise.all([
       User.findOne({ where: { id: followingId, role: 'user' } }),
@@ -233,7 +232,8 @@ const userController = {
           .map(user => ({
             ...user.toJSON(),
             followCount: user.Followers.length,
-            isFollowed: helpers.getUser(req).Followings.some(f => f.id === user.id)
+            isFollowed: helpers.getUser(req).Followings.some(f => f.id === user.id),
+            isCurrentUser: user.id === currentUser.id
           }))
           .sort((a, b) => b.followCount - a.followCount)
         res.render('user-replies', { user, replies, result: result.slice(0, 10), currentUser })
@@ -284,7 +284,8 @@ const userController = {
           .map(user => ({
             ...user.toJSON(),
             followCount: user.Followers.length,
-            isFollowed: helpers.getUser(req).Followings.some(f => f.id === user.id)
+            isFollowed: helpers.getUser(req).Followings.some(f => f.id === user.id),
+            isCurrentUser: user.id === currentUser.id
           }))
           .sort((a, b) => b.followCount - a.followCount)
         res.render('user-likes', { user, likes, result: result.slice(0, 10), currentUser })
@@ -325,7 +326,8 @@ const userController = {
           .map(user => ({
             ...user.toJSON(),
             followCount: user.Followers.length,
-            isFollowed: helpers.getUser(req).Followings.some(f => f.id === user.id)
+            isFollowed: helpers.getUser(req).Followings.some(f => f.id === user.id),
+            isCurrentUser: user.id === currentUser.id
           }))
           .sort((a, b) => b.followCount - a.followCount)
         res.render('following', { user, followings, result: result.slice(0, 10), currentUser })
@@ -367,7 +369,8 @@ const userController = {
           .map(user => ({
             ...user.toJSON(),
             followCount: user.Followers.length,
-            isFollowed: helpers.getUser(req).Followings.some(f => f.id === user.id)
+            isFollowed: helpers.getUser(req).Followings.some(f => f.id === user.id),
+            isCurrentUser: user.id === currentUser.id
           }))
           .sort((a, b) => b.followCount - a.followCount)
         res.render('follower', { user, followers, result: result.slice(0, 10), currentUser })

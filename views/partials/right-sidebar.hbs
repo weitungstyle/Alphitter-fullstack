@@ -1,39 +1,69 @@
 <div class="col-3" style="height: 100vh">
-  <div class="popular-container">
-    <div class="popular-title">
-      <h4>推薦跟隨</h4>
+    <div class="popular-container">
+        <div class="popular-title">
+            <h4>推薦跟隨</h4>
+        </div>
+        <ul class="popular-list-group p-3" style="display:inline">
+            {{#each result}}
+                <li
+                    class="list-group-item d-flex align-items-start justify-content-between"
+                >
+                    <div class="user-icon">
+                        <a class="tweets-name" href="/users/{{this.id}}/tweets">
+                            {{#if this.avatar}}
+                                <img
+                                    src="{{this.avatar}}"
+                                    alt="avatar"
+                                    class="user-avatar"
+                                />
+                            {{else}}
+                                <img
+                                    src="/images/icon/User Photo.png"
+                                    alt="avatar"
+                                    class="user-avatar"
+                                />
+                            {{/if}}</a>
+                    </div>
+                    <div class="ms-2 me-auto">
+                        <div
+                            class="popular-name"
+                            style="text-overflow:ellipsis; overflow:hidden; width:4.5rem"
+                        >{{this.name}}</div>
+                        <small
+                            class="small-account"
+                            style="text-overflow:ellipsis; overflow:hidden; width:4.5rem"
+                        >@{{this.account}}</small>
+                    </div>
+                    <div>
+                        {{#if isCurrentUser}}
+                            <div></div>
+                        {{else if this.isFollowed}}
+                            <form
+                                action="/followships/{{this.id}}?_method=DELETE"
+                                method="POST"
+                            >
+                                <button
+                                    type="submit"
+                                    name="id"
+                                    value="{{this.id}}"
+                                    class="following-btn"
+                                >正在跟隨</button>
+                                {{!-- <span class="followCount" style="">人數:{{this.followCount}}</span> --}}
+                            </form>
+                        {{else}}
+                            <form action="/followships" method="POST">
+                                <button
+                                    type="submit"
+                                    name="id"
+                                    value="{{this.id}}"
+                                    class="follow-btn"
+                                >跟隨</button>
+                                {{!-- <span class="followCount">人數:{{this.followCount}}</span> --}}
+                            </form>
+                        {{/if}}
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
     </div>
-    <ul class="popular-list-group p-3" style="display:inline">
-      {{#each result}}
-      <li class="list-group-item d-flex align-items-start justify-content-between">
-        <div class="user-icon">
-          <a class="tweets-name" href="/users/{{this.id}}/tweets"> {{#if this.avatar}}
-            <img src="{{this.avatar}}" alt="avatar" class="user-avatar">
-            {{else}}
-            <img src="/images/icon/User Photo.png" alt="avatar" class="user-avatar">
-            {{/if}}</a>
-        </div>
-        <div class="ms-2 me-auto">
-          <div class="popular-name" style="text-overflow:ellipsis; overflow:hidden; width:4.5rem">{{this.name}}</div>
-          <small class="small-account" style="text-overflow:ellipsis; overflow:hidden; width:4.5rem">@{{this.account}}</small>
-        </div>
-        <div>
-          {{#if isCurrentUser }}
-          <div></div>
-          {{else if this.isFollowed}}
-          <form action="/followships/{{this.id}}?_method=DELETE" method="POST">
-            <button type="submit" name="id" value="{{this.id}}" class="following-btn">正在跟隨</button>
-            {{!-- <span class="followCount" style="">人數:{{this.followCount}}</span> --}}
-          </form>
-          {{else}}
-          <form action="/followships" method="POST">
-            <button type="submit" name="id" value="{{this.id}}" class="follow-btn">跟隨</button>
-            {{!-- <span class="followCount">人數:{{this.followCount}}</span> --}}
-          </form>
-          {{/if}}
-        </div>
-      </li>
-      {{/each}}
-    </ul>
-  </div>
 </div>

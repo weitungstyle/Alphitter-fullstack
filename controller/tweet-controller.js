@@ -52,7 +52,8 @@ const tweetController = {
           .map(user => ({
             ...user.toJSON(),
             followCount: user.Followers.length,
-            isFollowed: helper.getUser(req).Followings.some(f => f.id === user.id)
+            isFollowed: helper.getUser(req).Followings.some(f => f.id === user.id),
+            isCurrentUser: user.id === currentUser.id
           }))
           .sort((a, b) => b.followCount - a.followCount)
         res.render('tweets', { Tweets: data, result: result.slice(0, 10), currentUser })
