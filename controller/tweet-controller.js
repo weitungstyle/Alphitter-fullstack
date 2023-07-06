@@ -1,12 +1,10 @@
 // 後續做到 User, Reply, Like 記得加進來
-const { User, Tweet, Reply, Like, Followship } = require('../models')
+const { User, Tweet, Like } = require('../models')
 const sequelize = require('sequelize')
-const { Op } = require('sequelize')
 const helper = require('../_helpers')
 
 const tweetController = {
   postTweet: (req, res) => {
-    // const UserId = helper.getUser(req).id
     const description = String(req.body.description)
 
     if (!description.trim()) {
@@ -27,7 +25,6 @@ const tweetController = {
     }
   },
   getTweets: (req, res, next) => {
-    // const loginUser = helper.getUser(req).id
     return Promise.all(
       [Tweet.findAll({
         attributes: {
@@ -37,7 +34,6 @@ const tweetController = {
             [sequelize.literal(`(SELECT (COUNT(*)>0) FROM Likes WHERE user_id = ${helper.getUser(req).id} AND tweet_id = Tweet.id)`), 'isLiked']
           ]
         },
-        // where: { UserId: { [Op.or]: [followedUser.following_id] } },
         include: { model: User, attributes: ['id', 'name', 'account', 'avatar'] },
         order: [['createdAt', 'DESC']],
         nest: true,
@@ -59,7 +55,6 @@ const tweetController = {
             isFollowed: helper.getUser(req).Followings.some(f => f.id === user.id)
           }))
           .sort((a, b) => b.followCount - a.followCount)
-        // console.log(data)
         res.render('tweets', { Tweets: data, result: result.slice(0, 10), currentUser })
       })
       .catch(err => next(err))

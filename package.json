@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node app.js",
-    "dev": "NODE_ENV=development nodemon app.js",
-    "test": "mocha test --exit --recursive --timeout 5000"
+    "dev": "NODE_ENV=development nodemon app.js"
   },
   "author": "",
   "license": "ISC",
@@ -46,12 +45,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/weitungstyle/twitter-fullstack-2023.git"
+    "url": "git+https://github.com/weitungstyle/Alphitter-fullstack"
   },
   "bugs": {
-    "url": "https://github.com/weitungstyle/twitter-fullstack-2023/issues"
+    "url": "https://github.com/weitungstyle/Alphitter-fullstack/issues"
   },
-  "homepage": "https://github.com/weitungstyle/twitter-fullstack-2023#readme",
+  "homepage": "https://github.com/weitungstyle/Alphitter-fullstack#readme",
   "optionalDependencies": {
     "win-node-env": "^0.6.1"
   },

@@ -1,6 +1,5 @@
-const { User, Tweet, Reply, Like, Followship } = require('../models')
+const { User, Tweet, Reply } = require('../models')
 const sequelize = require('sequelize')
-const bcrypt = require('bcryptjs')
 const helpers = require('../_helpers')
 
 const replyController = {
