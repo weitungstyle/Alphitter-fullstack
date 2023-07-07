@@ -13,16 +13,36 @@ passport.use(new LocalStrategy(
     passReqToCallback: true
   },
   // authenticate user
-  (req, account, password, cb) => {
-    User.findOne({ where: { account } })
-      .then(user => {
-        if (!user) return cb(null, false, req.flash('error_messages', '帳號不存在或密碼輸入錯誤！'))
-        bcrypt.compare(password, user.password)
-          .then(res => {
-            if (!res) return cb(null, false, req.flash('error_messages', '帳號不存在或密碼輸入錯誤！'))
-            return cb(null, user)
-          })
-      })
+  async (req, account, password, cb) => {
+    const user = await User.findOne({ where: { account } })
+    if (!user) {
+      return cb(null, false, req.flash('error_messages', '帳號不存在或密碼輸入錯誤！'))
+    }
+    const res = await bcrypt.compare(password, user.password)
+    if (!res) {
+      const currentTime = Date.now()
+      const lastFailedAt = user.lastFailedAt || 0
+      const errorCount = user.errorCount || 0
+      // 超過5分鐘重設錯誤次數
+      if (currentTime - lastFailedAt > 60 * 1000 * 5) {
+        await user.update({
+          errorCount: 1,
+          lastFailedAt: currentTime
+        })
+      } else if (errorCount >= 5) {
+        return cb(null, false, req.flash('error_messages', '錯誤次數過多，請稍後再嘗試！'))
+      } else {
+        await user.update({
+          errorCount: errorCount + 1,
+          lastFailedAt: currentTime
+        })
+      }
+      return cb(null, false, req.flash('error_messages', '帳號不存在或密碼輸入錯誤！'))
+    }
+    // await user.update({
+    //   errorCount: 0
+    // })
+    return cb(null, user)
   }
 ))
 // serialize and deserialize user

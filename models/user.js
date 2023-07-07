@@ -34,11 +34,9 @@ module.exports = (sequelize, DataTypes) => {
     avatar: DataTypes.STRING,
     cover: DataTypes.STRING,
     introduction: DataTypes.TEXT,
-    role: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: 'user'
-    }
+    role: DataTypes.STRING,
+    errorCount: DataTypes.INTEGER,
+    lastFailedAt: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'User',

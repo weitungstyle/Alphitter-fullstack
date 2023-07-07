@@ -9,10 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       account: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       email: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       password: {
         type: Sequelize.STRING
@@ -33,6 +33,12 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         defaultValue: 'user'
+      },
+      error_count: {
+        type: Sequelize.INTEGER
+      },
+      last_failed_at: {
+        type: Sequelize.DATE
       },
       created_at: {
         allowNull: false,
