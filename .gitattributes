@@ -1,3 +1,6 @@
+# linguist-detectable
+*.hbs linguist-detectable=false
+
 *                 text=auto
 
 # Source code
