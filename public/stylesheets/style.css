@@ -832,6 +832,7 @@ justify-content: center;
 .admin-main{
 height: calc(100vh - 76px);
 max-height: calc(100vh - 76px);
+overflow-y: auto;
 }
 .admin-tweets,.admin-users {
 border: 1px solid #E6ECF0;
@@ -892,8 +893,9 @@ overflow: hidden;
 height: 52px;
 }
 .user-card{
-/* height: calc(100vh - 76px);
-max-height: calc(100vh - 76px); */
+height: calc(100vh - 76px);
+max-height: calc(100vh - 76px);
+overflow-y: auto;
 display: flex;
 align-items: start;
 padding: 15px;

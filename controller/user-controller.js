@@ -39,9 +39,9 @@ const userController = {
       })
       .catch(err => next(err))
   },
-  logout: (req, res) => {
+  logout: (req, res, next) => {
     req.flash('success_messages', '登出成功！')
-    req.logout((err) => { next(err) })
+    req.logout(err => next(err))
     res.redirect('/signin')
   },
 
@@ -334,7 +334,7 @@ const userController = {
       })
       .catch(err => next(err))
   },
-  getUserFollower: (req, res) => {
+  getUserFollower: (req, res, next) => {
     const loginUserId = helpers.getUser(req).id
     const queryUserId = req.params.id
     return Promise.all([
