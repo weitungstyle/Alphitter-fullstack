@@ -1,5 +1,5 @@
 # linguist-detectable
-*.hbs linguist-detectable=false
+# *.hbs linguist-detectable=false
 
 *                 text=auto
 
