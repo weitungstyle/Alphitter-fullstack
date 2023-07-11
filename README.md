@@ -6,7 +6,7 @@ Simple Twitter | Individual Improvement Version
 
 [Live demo](https://xw093krds7.execute-api.ap-northeast-1.amazonaws.com/)
 
-![首頁畫面]()
+![首頁畫面](https://github.com/weitungstyle/Alphitter-fullstack/blob/master/public/alphitter_chrome_mac_light_1.png)
 
 ### 功能描述
 
